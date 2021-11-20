@@ -1,0 +1,44 @@
+ip a/ip -4 a/ip -6 a   #show all interface and associate ip address
+ip a show up
+ip a show dev interface   #show interface and associate ip address
+ip a add ip_address/cidr dev interface #add ip address to interface
+ip a del ip_address/cidr dev interface #delete ip address of interface
+
+ip l show/ip link  #show all interface information
+ip l show dev interface #show interface information
+ip l set interface up/down  #bring up/down interface
+ip l set mtu number dev interface #set mtu(maximum transmission unit) of interface
+ip l delete interface
+
+ip r/ip r list #show all route entries in kernel
+ip r show x.x.x.x/cidr # show network route 
+ip r add network/mask via gateway
+ip r add network/mask dev interface
+ip r add default network/mask via gateway
+ip r add default network/mask dev interface
+ip r add 192.168.121.0/24 via 192.168.121.1  #add a route to 192.168.121.0/24 via the gateway at 192.168.121.1
+ip r add 192.168.121.0/24 dev eth0 #add a route to 192.168.121.0/24 that can be reached on device eth0
+ip r add default via 192.168.121.1 dev eth0
+#add a default route via the local gateway 192.168.121.1 that can be reached on device eth0.
+ip r del 192.168.121.0/24 via 192.168.121.1 #delete a route for 192.168.121.0/24 via the gateway at 192.168.121.1
+ip r del ip-address #delete a entry in route table 
+ip r del default
+ip r del ip_address dev interface
+#when configure network interface  ip command must run with root privilege 
+make ip command change permanent: 
+1,add comamnd to startup script: 
+2,edit configure file: /etc/netplan/01-network-manager-all.yaml
+
+
+
+
+
+
+
+
+
+
+
+
+
+

