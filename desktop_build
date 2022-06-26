@@ -1,0 +1,11 @@
+phoronix
+cpu :amd ryzen threadripper 3970x
+motherboard: gigabyte aorus trx40 master
+fan:noctua nf-a14 pwm; premium quiet fan
+cpu cooler:noctua nh-u14s; noctua nf-a15
+case:be quiet dark base700
+fan:silent wings 3
+psu:seasonic focus gx-850
+storage:samsung evo 970 1tb
+memory:4×16gb ddr4-2666
+gpu:sapphire rx580
